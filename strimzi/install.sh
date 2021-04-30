@@ -8,15 +8,15 @@ kubectl create -f amq-streams-subscription.yaml
 # Ex: kubectl create -f strimzi-kafka-worker-machineset.yaml 
 
 # List the dedicated nodes for kafka brokers if you have not created a machineset particular for it
-for i in ip-10-0-159-172.eu-west-1.compute.internal
-do 
-kubectl label node $i dedicated=Kafka
-kubectl taint node $i dedicated=Kafka:NoSchedule
-
+#for i in ip-10-0-159-172.eu-west-1.compute.internal
+#do 
+#kubectl label node $i dedicated=Kafka
+#kubectl taint node $i dedicated=Kafka:NoSchedule
+#
 # To delete labels and taints
 #kubectl label node $i dedicated-
 #kubectl taint node $i dedicated=Kafka:NoSchedule-
-done
+#done
 
 kubectl create namespace strimzi
 

@@ -37,19 +37,17 @@ spec:
         deleteClaim: false
         class: ocs-storagecluster-ceph-rbd
     tolerations:
-      - key: "dedicated"
+      - key: "node.ocs.openshift.io/storage"
         operator: "Equal"
-        value: "Kafka"
+        value: "true"
         effect: "NoSchedule"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: dedicated
-              operator: In
-              values:
-              - Kafka
+            - key: cluster.ocs.openshift.io/openshift-storage
+              operator: Exists
     metrics:
       # Inspired by config from Kafka 2.0.0 example rules:
       # https://github.com/prometheus/jmx_exporter/blob/master/example_configs/kafka-2_0_0.yml
@@ -183,19 +181,17 @@ spec:
       deleteClaim: false
       class: ocs-storagecluster-ceph-rbd
     tolerations:
-      - key: "dedicated"
+      - key: "node.ocs.openshift.io/storage"
         operator: "Equal"
-        value: "Kafka"
+        value: "true"
         effect: "NoSchedule"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: dedicated
-              operator: In
-              values:
-              - Kafka
+            - key: cluster.ocs.openshift.io/openshift-storage
+              operator: Exists
     metrics: 
       # Inspired by Zookeeper rules
       # https://github.com/prometheus/jmx_exporter/blob/master/example_configs/zookeeper.yaml

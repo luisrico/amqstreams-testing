@@ -7,5 +7,5 @@ kubectl create -f user-workload-monitoring-config-configmap.yaml
 kubectl create -f cluster-monitoring-config-configmap.yaml
 
 # Add pod monitor for strimzi workload
-k create -f strimzi-pod-monitor.yaml
+kubectl create -f strimzi-pod-monitor.yaml
 

@@ -1,8 +1,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: single-consumer
+  name: multiple-consumer
 spec:
+  completions: 16
+  parallelism: 16
   template:
     spec:
       containers:
@@ -15,8 +17,8 @@ spec:
         - --topic 
         - test-rep-one 
         - --messages 
-        - '1600000000' 
+        - '100000000' 
         - --threads
-        - '16'
+        - '1'
       restartPolicy: Never
   backoffLimit: 4
