@@ -1,0 +1,11 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: test-rep-one
+  labels:
+    strimzi.io/cluster: strimzi-cluster
+spec:
+  config: {}
+  partitions: 6
+  replicas: 1
+  topicName: test-rep-one

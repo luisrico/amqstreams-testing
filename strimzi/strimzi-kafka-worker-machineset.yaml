@@ -1,0 +1,68 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  labels:
+    machine.openshift.io/cluster-api-cluster: strimzi-pzfxc
+  name: strimzi-kafka-worker
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: strimzi-pzfxc
+      machine.openshift.io/cluster-api-machineset: strimzi-kafka-worker
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: strimzi-pzfxc
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: strimzi-kafka-worker
+    spec:
+      metadata: 
+        labels: 
+          dedicated: Kafka
+      taints:
+      - key: dedicated
+        value: Kafka
+        effect: NoSchedule
+      providerSpec:
+        value:
+          ami:
+            id: ami-07323d56fb932c84c
+          apiVersion: awsproviderconfig.openshift.io/v1beta1
+          blockDevices:
+          - ebs:
+              encrypted: true
+              iops: 0
+              kmsKey:
+                arn: ""
+              volumeSize: 120
+              volumeType: gp2
+          credentialsSecret:
+            name: aws-cloud-credentials
+          deviceIndex: 0
+          iamInstanceProfile:
+            id: strimzi-pzfxc-worker-profile
+          instanceType: m5d.2xlarge
+          kind: AWSMachineProviderConfig
+          metadata:
+            creationTimestamp: null
+          placement:
+            availabilityZone: eu-west-1b
+            region: eu-west-1
+          securityGroups:
+          - filters:
+            - name: tag:Name
+              values:
+              - strimzi-pzfxc-worker-sg
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - strimzi-pzfxc-private-eu-west-1b
+          tags:
+          - name: kubernetes.io/cluster/strimzi-pzfxc
+            value: owned
+          userDataSecret:
+            name: worker-user-data

@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: single-producer-3x-async-replication
+spec:
+  template:
+    spec:
+      containers:
+      - name: producer
+        image: registry.redhat.io/amq7/amq-streams-kafka-26-rhel7:1.7.0
+        command:
+        - /opt/kafka/bin/kafka-producer-perf-test.sh
+        - --topic 
+        - test 
+        - --num-records 
+        - '50000000' 
+        - --record-size
+        - '100'
+        - --throughput 
+        - '-1'
+        - --producer-props 
+        - acks=-1 
+        - bootstrap.servers=strimzi-cluster-kafka-bootstrap:9092 
+        - buffer.memory=67108864 
+        - batch.size=8196
+      restartPolicy: Never
+  backoffLimit: 4

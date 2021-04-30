@@ -1,0 +1,26 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeSet
+metadata:
+  name: kafka
+  namespace: openshift-local-storage
+spec:
+  deviceInclusionSpec:
+    deviceMechanicalProperties:
+    - NonRotational
+    deviceTypes:
+    - disk
+    minSize: 1Gi
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: In
+        values:
+        - ip-10-0-140-232
+  storageClassName: kafka
+  tolerations:
+  - key: dedicated
+    value: Kafka
+    effect: NoSchedule
+    operator: Equal
+  volumeMode: Filesystem
