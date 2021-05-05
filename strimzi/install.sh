@@ -18,6 +18,11 @@ kubectl create -f amq-streams-subscription.yaml
 #kubectl taint node $i dedicated=Kafka:NoSchedule-
 #done
 
+## Taint all nodes used by OCS to be used as well for Kafka using the OCS taint:
+oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:NoSchedule
+oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:NoSchedule
+oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:NoSchedule
+
 kubectl create namespace strimzi
 
 # Create the cluster

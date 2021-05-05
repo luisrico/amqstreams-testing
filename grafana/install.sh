@@ -10,3 +10,4 @@ helm install grafana grafana/grafana -n strimzi --set securityContext=null --set
 kubectl get secret grafana -n strimzi -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 # Create a route to the grafana service, edge or without tls
+oc expose service grafana
