@@ -23,7 +23,7 @@ oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:N
 oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:NoSchedule
 oc adm taint node <baremetal OCS node here> node.ocs.openshift.io/storage=true:NoSchedule
 
-kubectl create namespace strimzi
+###kubectl create namespace strimzi
 
 # Create the cluster
 kubectl create -f kafka-cluster.yaml

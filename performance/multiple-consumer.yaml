@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: multiple-consumer
+  namespace: strimzi
 spec:
   completions: 16
   parallelism: 16
